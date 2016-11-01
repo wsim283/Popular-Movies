@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/activity_margin"
+    android:layout_marginRight="@dimen/activity_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@drawable/border_recycler_view_items_trailer"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/no_trailers_msg"
+        android:id="@+id/no_trailers"
+        android:textStyle="italic"
+        />
+    <LinearLayout  android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            style="@style/DetailLabelStyle"
+            android:text="@string/trailer_label"
+            android:id="@+id/trailer_label"
+            android:visibility="gone"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/activity_vertical_margin">
+            <example.com.popularmovies.Detail.TrailerPlayButton
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/trailer_play"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/trailer_title"
+                style="@style/DetailContentStyle"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:paddingRight="@dimen/padding_between_details"
+    android:paddingLeft="@dimen/activity_horizontal_margin">
+
+    <ImageView
+        android:layout_width="@dimen/default_poster_width"
+        android:layout_height="@dimen/default_poster_height"
+        android:id="@+id/movie_poster_thumbnail"
+        android:paddingBottom="@dimen/padding_between_details"/>
+
+
+</LinearLayout>

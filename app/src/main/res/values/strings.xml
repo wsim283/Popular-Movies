@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">Popular Movies</string>
+    <string name="settings_label">Settings</string>
+    <string name="no_connection_msg">Please make sure you have internet connection.</string>
+    <string name="no_trailers_msg">No trailers available</string>
+    <string name="mark_favourites_button"> MARK AS\nFAVOURITE</string>
+    <string name="unmark_favourites_button"> un-mark from\nfavourites</string>
+    <string name="movie_extra" translatable="false">movie</string>
+    <string name="synopsis_label">Synopsis</string>
+    <string name="date_label">Release Date:</string>
+    <string name="trailer_title">Trailer </string>
+    <string name="trailer_label">Trailer: </string>
+    <string name="max_rating">/10</string>
+    <string name="roboto_font" translatable="false">Roboto-Regular.ttf</string>
+    <string name="roboto_bold_font" translatable="false">RobotoCondensed-Bold.ttf</string>
+
+    <string name="favourites" translatable="false">favourites</string>
+
+    <string name="review_author_param" translatable="false">author</string>
+    <string name="movie_id" translatable="false">movie/%1s?</string>
+
+    <string name="api_base_url" translatable="false">https://api.themoviedb.org/3/</string>
+    <string name="movie_popular_file_path" translatable="false">movie/popular?</string>
+    <string name="movie_top_rated_file_path" translatable="false">movie/top_rated?</string>
+    <string name="api_key_param" translatable="false">api_key</string>
+    <string name="image_base_url" translatable="false">http://image.tmdb.org/t/p/</string>
+    <string name="image_default_size_path" translatable="false">w185/</string>
+    <string name="movie_trailers_path" translatable="false">movie/%1s/videos</string>
+    <string name="movie_reviews_path" translatable="false">movie/%1s/reviews</string>
+    <string name="youtube_watch_path" translatable="false">https://www.youtube.com/watch?</string>
+    <string name="youtube_video_param" translatable="false">v</string>
+
+    <string name="trailer_name_json_key" translatable="false">name</string>
+    <string name="content_json_key" translatable="false">content</string>
+    <string name="key_json_key" translatable="false">key</string>
+    <string name="id_json_key" translatable="false">id</string>
+    <string name="results_json_key" translatable="false">results</string>
+    <string name="title_json_key" translatable="false">original_title</string>
+    <string name="synopsis_json_key" translatable="false">overview</string>
+    <string name="date_json_key" translatable="false">release_date</string>
+    <string name="poster_json_key" translatable="false">poster_path</string>
+    <string name="rating_json_key" translatable="false">vote_average</string>
+
+
+    <string name="pref_sort_label">Sort By</string>
+    <string name="pref_sort_key" translatable="false">sort</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

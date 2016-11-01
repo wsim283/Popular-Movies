@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="sort_entries">
+        <item>Popularity</item>
+        <item>Rating</item>
+        <item>Favourite</item>
+    </array>
+
+    <!--Make entry value to the file path for the url, this way we can easily attach it to the baseURL-->
+    <array name="sort_entry_values">
+        <item>@string/movie_popular_file_path</item>
+        <item>@string/movie_top_rated_file_path</item>
+        <item>@string/favourites</item>
+    </array>
+
+
+</resources>

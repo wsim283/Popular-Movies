@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_margin="@dimen/activity_margin"
+    android:paddingBottom="@dimen/activity_padding"
+    android:background="@drawable/border_recycler_view_items">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <include layout="@layout/posterthumbnail" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/activity_horizontal_margin">
+            <TextView
+                style="@style/DetailLabelStyle"
+                android:id="@+id/year"
+                android:paddingBottom="@dimen/padding_between_details"/>
+
+            <TextView
+                style="@style/DetailLabelStyle"
+                android:id="@+id/date"
+                android:paddingBottom="@dimen/padding_between_details"
+                />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <Button
+                    android:layout_width="@dimen/favourite_button_size"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/favourite_selector"
+                    android:text="@string/mark_favourites_button"
+                    android:id="@+id/favourite_button"
+                    />
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:id="@+id/markingProgress"/>
+            </RelativeLayout>
+
+
+            <TextView
+                style="@style/DetailLabelStyle"
+                android:textStyle="bold"
+                android:id="@+id/rating_textview"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+    <include layout="@layout/synopsis_layout"/>
+</LinearLayout>

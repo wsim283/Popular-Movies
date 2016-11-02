@@ -38,6 +38,7 @@
                     android:background="@drawable/favourite_selector"
                     android:text="@string/mark_favourites_button"
                     android:id="@+id/favourite_button"
+                    android:elevation="4dp"
                     />
                 <ProgressBar
                     android:layout_width="wrap_content"

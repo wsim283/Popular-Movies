@@ -46,6 +46,16 @@ public class MovieRecAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         setFirstMovieClicked = true;
     }
 
+    public void removeMovieData(String id){
+        for(int ix = 0; ix < movieList.size(); ix++){
+            if(movieList.get(ix).getId().equals(id)){
+                movieList.remove(ix);
+                setFirstMovieClicked(twoPane);
+                notifyDataSetChanged();
+                return;
+            }
+        }
+    }
     public void setFirstMovieClicked(boolean twoPane){
         this.twoPane = twoPane;
        setFirstMovieClicked = twoPane;

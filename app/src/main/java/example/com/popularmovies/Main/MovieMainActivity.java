@@ -60,6 +60,7 @@ public class MovieMainActivity extends AppCompatActivity implements MovieMainFra
                 if(findViewById(R.id.movie_detail_container)!= null){
                     twoPane = true;
                     MovieDetailFragment movieDetailFragment = new MovieDetailFragment();
+                    movieDetailFragment.setTwoPane(twoPane);
                     fgm.beginTransaction().add(R.id.movie_detail_container,movieDetailFragment,DETAIL_TAG).commit();
                 }else{
                     twoPane = false;
@@ -86,6 +87,7 @@ public class MovieMainActivity extends AppCompatActivity implements MovieMainFra
 
 
             MovieDetailFragment movieDetailFragment = new MovieDetailFragment();
+            movieDetailFragment.setTwoPane(twoPane);
             Bundle args = new Bundle();
             args.putParcelable(getString(R.string.movie_extra), movie);
             movieDetailFragment.setArguments(args);
@@ -94,9 +96,11 @@ public class MovieMainActivity extends AppCompatActivity implements MovieMainFra
     }
 
     @Override
-    public void favouritesClicked() {
-        if(twoPane){
-            movieMainFragment.updateMovieList();
+    public void favouritesUnMarkClicked(boolean isFavourite, String movieId) {
+        if(twoPane && isFavourite){
+            Log.v(LOG_TAG, "favouriteUnMarkClicked");
+            movieMainFragment.updateMovieListOffline(movieId);
         }
+
     }
 }

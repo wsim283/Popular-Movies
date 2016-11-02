@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/custom_title_header"
+        android:background="@color/colorPrimary"
+        android:id="@+id/movie_title"
+        android:gravity="start|center_vertical"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/title_text_size"
+        android:elevation="4dp"
+        android:visibility="gone"/>
     <android.support.design.widget.TabLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -50,5 +50,7 @@
     <string name="pref_sort_key" translatable="false">sort</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nothing_in_favourites_err">Currently there\'s is nothing in your Favourites</string>
+    <string name="no_reviews_found_err">No reviews found</string>
+    <string name="error_str_key">error message</string>
 </resources>

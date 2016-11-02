@@ -108,6 +108,7 @@ public class DetailRecAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 detailInfo.getSynopsisView().setText(clickedMovie.getSynopsis());
                 String rating = ""+clickedMovie.getRating() + context.getString(R.string.max_rating);
                 detailInfo.getRatingView().setText(rating);
+
                 final String idFavFormat = String.format(context.getString(R.string.movie_id),clickedMovie.getId());
 
                 if(favouritesSet.contains(idFavFormat)){
@@ -132,6 +133,14 @@ public class DetailRecAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                                     clickedMovie.getTitle(),
                                     context.getString(R.string.favourite_unmark_toast_msg)
                             );
+                            boolean isFavourite = false;
+                            String sortByPath = PreferenceManager.getDefaultSharedPreferences(context)
+                                    .getString(context.getString(R.string.pref_sort_key),context.getString(R.string.movie_popular_file_path));
+                            if(sortByPath.equals(context.getString(R.string.favourites))){
+                                isFavourite = true;
+                            }
+                            ((MovieInfoFragment.FavouriteChangeListener)context).favouritesUnMarkClicked(isFavourite, clickedMovie.getId());
+
                         }else{
                             v.setActivated(true);
                             ((Button)v).setText(context.getString(R.string.unmark_favourites_button));
@@ -155,7 +164,9 @@ public class DetailRecAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
                         Toast.makeText(context, toastMsg,Toast.LENGTH_SHORT).show();
 
-                        ((MovieInfoFragment.FavouriteChangeListener)context).favouritesClicked();
+
+
+
                     }
                 });
                 Picasso.with(context).load(clickedMovie.getImageUrl()).into(detailInfo.getThumbnailView());

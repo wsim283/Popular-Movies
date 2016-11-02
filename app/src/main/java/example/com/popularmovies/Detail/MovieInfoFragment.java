@@ -28,7 +28,7 @@ public class MovieInfoFragment extends Fragment {
     }
 
     public interface FavouriteChangeListener{
-        void favouritesClicked();
+        void favouritesUnMarkClicked(boolean isFavourite, String movieId);
     }
 
     @Override

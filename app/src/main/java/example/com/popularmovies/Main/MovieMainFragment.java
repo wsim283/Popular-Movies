@@ -19,11 +19,12 @@ import java.util.Iterator;
 import java.util.Set;
 
 import example.com.popularmovies.Movie;
+import example.com.popularmovies.Orientation;
 import example.com.popularmovies.PopularMoviesHelper;
 import example.com.popularmovies.R;
 
 
-public class MovieMainFragment extends Fragment {
+public class MovieMainFragment extends Fragment implements Orientation {
 
     private final String LOG_TAG = this.getClass().getSimpleName();
     private MovieRecAdapter movieRecAdapter;
@@ -64,6 +65,7 @@ public class MovieMainFragment extends Fragment {
         moviesRecView.setLayoutManager(new GridLayoutManager(moviesRecView.getContext(),
                 getResources().getInteger(R.integer.grid_columns)));
 
+
         movieRecAdapter = new MovieRecAdapter(getActivity(),new ArrayList<Movie>());
         moviesRecView.setAdapter(movieRecAdapter);
 
@@ -75,7 +77,7 @@ public class MovieMainFragment extends Fragment {
      * It is used in onStart so that the list gets updated when user changed
      * the sort order from popularity to top-rated and vice versa.
      */
-    public void updateMovieList(){
+    private void updateMovieList(){
         FetchMovieListTask fetchMoviesTask = new FetchMovieListTask(getContext(),movieRecAdapter,false);
         //for convenience, the entry values of each entry are set to the file_path for the url,
         //for e.g "Popularity" entry is set to "movie/popular?" entry value
@@ -96,6 +98,16 @@ public class MovieMainFragment extends Fragment {
             fetchMoviesTask.execute(sortByPath);
         }
 
+    }
+
+    /**
+     * for favourites list. user has a choice to un-mark a movie from favourites.
+     * This function only gets called when we are currently showing the favourites movie list
+     * and when the user hit un-mark.
+     *
+     */
+    public void updateMovieListOffline(String movieId){
+        movieRecAdapter.removeMovieData(movieId);
     }
 
 

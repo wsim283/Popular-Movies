@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import example.com.popularmovies.ErrorFragment;
 import example.com.popularmovies.Movie;
 import example.com.popularmovies.R;
 
@@ -16,8 +17,8 @@ import example.com.popularmovies.R;
 public class PagerAdapter extends FragmentStatePagerAdapter {
 
     int numTabs;
-    MovieInfoFragment movieInfoFragment = null;
-    ReviewFragment reviewFragment = null;
+    Fragment pageFirstFrag = null;
+    Fragment pageSecondFrag = null;
     Movie selectedMovie;
     Context context;
 
@@ -35,24 +36,39 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
         switch (position){
 
             case 1 :
-                if(reviewFragment == null){
+                if(pageSecondFrag == null){
                     Bundle args = new Bundle();
-                    reviewFragment = new ReviewFragment();
-                    args.putParcelable(context.getString(R.string.movie_extra),
-                            selectedMovie);
-                    reviewFragment.setArguments(args);
+                    if(selectedMovie != null) {
+                        pageSecondFrag = new ReviewFragment();
+                        args.putParcelable(context.getString(R.string.movie_extra),
+                                selectedMovie);
+                        pageSecondFrag.setArguments(args);
+                    }else{
+                        args.putString(context.getString(R.string.error_str_key),
+                                context.getString(R.string.no_reviews_found_err));
+                        pageSecondFrag = new ErrorFragment();
+                        pageSecondFrag.setArguments(args);
+                    }
                 }
 
-                return reviewFragment;
+                return pageSecondFrag;
             default:
-                if(movieInfoFragment == null) {
+
+                if(pageFirstFrag == null) {
                     Bundle args = new Bundle();
-                    movieInfoFragment = new MovieInfoFragment();
-                    args.putParcelable(context.getString(R.string.movie_extra),
-                            selectedMovie);
-                    movieInfoFragment.setArguments(args);
+                    if(selectedMovie != null) {
+                        pageFirstFrag = new MovieInfoFragment();
+                        args.putParcelable(context.getString(R.string.movie_extra),
+                                selectedMovie);
+                        pageFirstFrag.setArguments(args);
+                    }else{
+                        args.putString(context.getString(R.string.error_str_key),
+                                context.getString(R.string.nothing_in_favourites_err));
+                        pageFirstFrag = new ErrorFragment();
+                        pageFirstFrag.setArguments(args);
+                    }
                 }
-                return movieInfoFragment;
+                return pageFirstFrag;
         }
 
     }

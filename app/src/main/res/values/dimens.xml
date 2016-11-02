@@ -6,7 +6,7 @@
     <dimen name="activity_padding">32dp</dimen>
     <dimen name="padding_between_details">5dp</dimen>
 
-    <dimen name="title_text_size">36sp</dimen>
+    <dimen name="title_text_size">24sp</dimen>
     <dimen name="detail_content_label_size">18sp</dimen>
     <dimen name="detail_content_text_size">14sp</dimen>
 
@@ -15,6 +15,6 @@
     <dimen name="default_poster_height">185dp</dimen>
 
     <dimen name="rating_star_size">18.667dp</dimen>
-    <dimen name="custom_title_header">150dp</dimen>
+    <dimen name="custom_title_header">100dp</dimen>
 
 </resources>

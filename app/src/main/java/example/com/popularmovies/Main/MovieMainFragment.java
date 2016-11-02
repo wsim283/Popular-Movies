@@ -53,6 +53,8 @@ public class MovieMainFragment extends Fragment {
         super.onStart();
     }
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -73,7 +75,7 @@ public class MovieMainFragment extends Fragment {
      * It is used in onStart so that the list gets updated when user changed
      * the sort order from popularity to top-rated and vice versa.
      */
-    private void updateMovieList(){
+    public void updateMovieList(){
         FetchMovieListTask fetchMoviesTask = new FetchMovieListTask(getContext(),movieRecAdapter,false);
         //for convenience, the entry values of each entry are set to the file_path for the url,
         //for e.g "Popularity" entry is set to "movie/popular?" entry value

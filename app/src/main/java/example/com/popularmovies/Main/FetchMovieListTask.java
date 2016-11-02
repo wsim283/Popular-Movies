@@ -42,7 +42,7 @@ public class FetchMovieListTask extends AsyncTask<String,Void,ArrayList<Movie>> 
 
         HttpURLConnection urlConnection = null;
 
-        ArrayList<Movie> fetchedMovies = null;
+        ArrayList<Movie> fetchedMovies = new ArrayList<>();
         //sets up the base url. This includes the main url and the sort path given in the param
         for(int ix = 0; ix < sortByPath.length; ix++) {
             Uri.Builder baseUrl = PopularMoviesHelper.getUri(context, sortByPath[ix]);
@@ -58,9 +58,6 @@ public class FetchMovieListTask extends AsyncTask<String,Void,ArrayList<Movie>> 
                 if (urlConnection.getResponseCode() == 200) {
                     String jsonResponseStr = PopularMoviesHelper.extractJsonResponseFromStream(urlConnection.getInputStream());
                     if(singleMovie){
-                        if(fetchedMovies == null){
-                            fetchedMovies = new ArrayList<>();
-                        }
                         fetchedMovies.add(PopularMoviesHelper.extractSingleMovieFromJson(new JSONObject(jsonResponseStr),context));
                     }else {
                         Log.v(LOG_TAG, "sortByPath size: " + sortByPath.length);
@@ -86,7 +83,11 @@ public class FetchMovieListTask extends AsyncTask<String,Void,ArrayList<Movie>> 
 
     @Override
     protected void onPostExecute(ArrayList<Movie> movies) {
-        if(movies == null || movies.size() == 0){
+        //Took out the "movies.size == 0" logic from below
+        //reason is because for favourites, you can delete a movie
+        //if the logic still exist then when we have 0 favourite movies from 1 favourite movie,
+        // it will just return and then upDateData is ignored
+        if(movies == null){
             return;
         }
         movieRecAdapter.updateData(movies);

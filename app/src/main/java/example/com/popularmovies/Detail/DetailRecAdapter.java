@@ -13,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -45,6 +47,9 @@ public class DetailRecAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private Movie clickedMovie;
     private ArrayList<Trailer> trailers;
     boolean fetchComplete = false;
+    SharedPreferences sharedPreferences;
+    String favouritesKey;
+    Set<String> favouritesSet;
 
 
     public DetailRecAdapter(Context context, Movie clickedMovie, ArrayList<Trailer> trailers){
@@ -52,6 +57,9 @@ public class DetailRecAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         this.context = context;
         this.clickedMovie = clickedMovie;
         this.trailers = trailers;
+        favouritesKey = context.getString(R.string.favourites);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        favouritesSet =  sharedPreferences.getStringSet( favouritesKey, new HashSet<String>());
     }
 
     @Override
@@ -100,24 +108,40 @@ public class DetailRecAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 detailInfo.getSynopsisView().setText(clickedMovie.getSynopsis());
                 String rating = ""+clickedMovie.getRating() + context.getString(R.string.max_rating);
                 detailInfo.getRatingView().setText(rating);
+                final String idFavFormat = String.format(context.getString(R.string.movie_id),clickedMovie.getId());
+
+                if(favouritesSet.contains(idFavFormat)){
+                    detailInfo.getFavBtnView().setActivated(true);
+                    detailInfo.getFavBtnView().setText(context.getString(R.string.unmark_favourites_button));
+                }else{
+                    detailInfo.getFavBtnView().setActivated(false);
+                }
+
+
+
                 detailInfo.getFavBtnView().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String favouritesKey = context.getString(R.string.favourites);
-                        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-                        Set<String> favouritesSet=  sharedPreferences.getStringSet(
-                               favouritesKey,
-                               new HashSet<String>()
-                        );
 
-
-                        String idFavFormat = String.format(context.getString(R.string.movie_id),clickedMovie.getId());
+                        String toastMsg;
                         if(favouritesSet.contains(idFavFormat)){
+                            v.setActivated(false);
+                            ((Button)v).setText(context.getString(R.string.mark_favourites_button));
                             favouritesSet.remove(idFavFormat);
+                            toastMsg = String.format(context.getString(R.string.favourite_toast_msg),
+                                    clickedMovie.getTitle(),
+                                    context.getString(R.string.favourite_unmark_toast_msg)
+                            );
                         }else{
+                            v.setActivated(true);
+                            ((Button)v).setText(context.getString(R.string.unmark_favourites_button));
                             favouritesSet.add(idFavFormat);
-                        }
+                            toastMsg = String.format(context.getString(R.string.favourite_toast_msg),
+                                    clickedMovie.getTitle(),
+                                    context.getString(R.string.favourite_mark_toast_msg)
+                            );
 
+                        }
 
                         Iterator<String> iterator = favouritesSet.iterator();
 
@@ -125,12 +149,13 @@ public class DetailRecAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                             Log.v(LOG_TAG, iterator.next());
                         }
 
-
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.remove(favouritesKey).commit();
                         editor.putStringSet(favouritesKey, favouritesSet).commit();
 
+                        Toast.makeText(context, toastMsg,Toast.LENGTH_SHORT).show();
 
+                        ((MovieInfoFragment.FavouriteChangeListener)context).favouritesClicked();
                     }
                 });
                 Picasso.with(context).load(clickedMovie.getImageUrl()).into(detailInfo.getThumbnailView());

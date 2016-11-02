@@ -31,7 +31,7 @@ public class TrailerPlayButton extends View {
 
         btnInnerPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         btnInnerPaint.setStyle(Paint.Style.FILL);
-        btnInnerPaint.setColor(getContext().getResources().getColor(R.color.colorStarRating));
+        btnInnerPaint.setColor(getContext().getResources().getColor(R.color.colorAccent));
     }
 
 

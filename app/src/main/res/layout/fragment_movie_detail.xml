@@ -13,7 +13,8 @@
         android:id="@+id/tab_layout"
         android:minHeight="?attr/actionBarSize"
         app:tabTextColor="@color/colorWhite"
-        app:tabSelectedTextColor="@color/colorWhite"/>
+        app:tabSelectedTextColor="@color/colorWhite"
+        android:elevation="4dp"/>
 
     <include layout="@layout/pager_layout"/>
 

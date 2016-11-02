@@ -13,17 +13,18 @@ import android.view.MenuItem;
 
 import example.com.popularmovies.Detail.MovieDetailActivity;
 import example.com.popularmovies.Detail.MovieDetailFragment;
+import example.com.popularmovies.Detail.MovieInfoFragment;
 import example.com.popularmovies.Movie;
 import example.com.popularmovies.R;
 import example.com.popularmovies.Settings.SettingsActivity;
 
-public class MovieMainActivity extends AppCompatActivity implements MovieMainFragment.MovieMainListener{
+public class MovieMainActivity extends AppCompatActivity implements MovieMainFragment.MovieMainListener, MovieInfoFragment.FavouriteChangeListener{
 
 
     private  final String LOG_TAG = this.getClass().getSimpleName();
     private String DETAIL_TAG = "MOVIE_DETAIL_FRAG";
     boolean twoPane = false;
-
+    MovieMainFragment movieMainFragment;
     FragmentManager fgm;
 
     @Override
@@ -70,7 +71,7 @@ public class MovieMainActivity extends AppCompatActivity implements MovieMainFra
         }
 
 
-        MovieMainFragment movieMainFragment = (MovieMainFragment) fgm.findFragmentById(R.id.movie_container);
+        movieMainFragment = (MovieMainFragment) fgm.findFragmentById(R.id.movie_container);
         movieMainFragment.setTwoPane(twoPane);
 
     }
@@ -89,6 +90,13 @@ public class MovieMainActivity extends AppCompatActivity implements MovieMainFra
             args.putParcelable(getString(R.string.movie_extra), movie);
             movieDetailFragment.setArguments(args);
             fgm.beginTransaction().replace(R.id.movie_detail_container, movieDetailFragment,DETAIL_TAG).commit();
+        }
     }
+
+    @Override
+    public void favouritesClicked() {
+        if(twoPane){
+            movieMainFragment.updateMovieList();
+        }
     }
 }

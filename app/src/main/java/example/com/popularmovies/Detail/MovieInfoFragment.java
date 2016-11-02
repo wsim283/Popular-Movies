@@ -27,6 +27,9 @@ public class MovieInfoFragment extends Fragment {
         // Required empty public constructor
     }
 
+    public interface FavouriteChangeListener{
+        void favouritesClicked();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

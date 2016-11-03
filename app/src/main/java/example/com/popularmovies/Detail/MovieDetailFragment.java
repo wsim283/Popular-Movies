@@ -23,7 +23,7 @@ import example.com.popularmovies.R;
 public class MovieDetailFragment extends Fragment implements Orientation {
 
     private  final String LOG_TAG = this.getClass().getSimpleName();
-
+    PagerAdapter pagerAdapter;
     boolean twoPane;
     public MovieDetailFragment() {
         twoPane = false;
@@ -43,7 +43,7 @@ public class MovieDetailFragment extends Fragment implements Orientation {
 
 
         Movie selectedMovie = null;
-        if(getArguments() != null) {
+        if(getArguments() != null && getArguments().getParcelable(getString(R.string.movie_extra))!=null) {
             selectedMovie = getArguments().getParcelable(getString(R.string.movie_extra));
             if(twoPane){
                 TextView movieTitleview = (TextView)rootView.findViewById(R.id.movie_title);
@@ -55,7 +55,7 @@ public class MovieDetailFragment extends Fragment implements Orientation {
 
         TabLayout detailsTab = PopularMoviesHelper.setLayoutTab(rootView, R.id.tab_layout);
         final ViewPager viewPager = (ViewPager) rootView.findViewById(R.id.pager);
-        PagerAdapter pagerAdapter = new PagerAdapter(getActivity().getSupportFragmentManager(), detailsTab.getTabCount(), selectedMovie, getContext());
+        pagerAdapter = new PagerAdapter(getActivity().getSupportFragmentManager(), detailsTab.getTabCount(), selectedMovie, getContext());
 
         viewPager.setAdapter(pagerAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(detailsTab));
@@ -85,4 +85,5 @@ public class MovieDetailFragment extends Fragment implements Orientation {
     public void setTwoPane(boolean twoPane) {
         this.twoPane = twoPane;
     }
+
 }

@@ -53,4 +53,6 @@
     <string name="nothing_in_favourites_err">Currently there\'s is nothing in your Favourites</string>
     <string name="no_reviews_found_err">No reviews found</string>
     <string name="error_str_key">error message</string>
+    <string name="clicked_position">clicked position</string>
+    <string name="clicked_movie_id">clicked movie id</string>
 </resources>

@@ -76,7 +76,6 @@ public class FetchMovieTrailerTask extends AsyncTask<String,Void,ArrayList<Trail
     @Override
     protected void onPostExecute(ArrayList<Trailer> trailers) {
         if(trailers == null || trailers.size() == 0){
-
             return;
         }
 

@@ -18,9 +18,12 @@ public class Poster extends RecyclerView.ViewHolder{
     public Poster(View parent){
         super(parent);
         posterView = (ImageView)parent.findViewById(R.id.movie_poster_imageview);
+
     }
 
     public ImageView getPosterView() {
         return posterView;
     }
+
+
 }

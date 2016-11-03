@@ -18,7 +18,8 @@ import example.com.popularmovies.Movie;
 import example.com.popularmovies.R;
 import example.com.popularmovies.Settings.SettingsActivity;
 
-public class MovieMainActivity extends AppCompatActivity implements MovieMainFragment.MovieMainListener, MovieInfoFragment.FavouriteChangeListener{
+public class MovieMainActivity extends AppCompatActivity implements MovieMainFragment.MovieMainListener,
+        MovieInfoFragment.FavouriteChangeListener, FetchMovieListTask.DataListener{
 
 
     private  final String LOG_TAG = this.getClass().getSimpleName();
@@ -26,6 +27,7 @@ public class MovieMainActivity extends AppCompatActivity implements MovieMainFra
     boolean twoPane = false;
     MovieMainFragment movieMainFragment;
     FragmentManager fgm;
+    Bundle savedInstanceState;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -50,25 +52,27 @@ public class MovieMainActivity extends AppCompatActivity implements MovieMainFra
 
         fgm = getSupportFragmentManager();
 
+        this.savedInstanceState = savedInstanceState;
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = connMgr.getActiveNetworkInfo();
         //make sure we have internet connection, if not display error message
         if(netInfo != null && netInfo.isConnected()) {
-            if (savedInstanceState == null) {
 
 
-                if(findViewById(R.id.movie_detail_container)!= null){
-                    twoPane = true;
+
+            if(findViewById(R.id.movie_detail_container)!= null) {
+                twoPane = true;
+                if (savedInstanceState == null) {
                     MovieDetailFragment movieDetailFragment = new MovieDetailFragment();
                     movieDetailFragment.setTwoPane(twoPane);
-                    fgm.beginTransaction().add(R.id.movie_detail_container,movieDetailFragment,DETAIL_TAG).commit();
-                }else{
-                    twoPane = false;
-                }
+                    fgm.beginTransaction().add(R.id.movie_detail_container, movieDetailFragment, DETAIL_TAG).commit();
 
+                }
+            }else{
+                twoPane = false;
             }
-        }else{
-            //findViewById(R.id.error_connection_msg).setVisibility(View.VISIBLE);
+
+
         }
 
 
@@ -78,14 +82,20 @@ public class MovieMainActivity extends AppCompatActivity implements MovieMainFra
     }
 
     @Override
-    public void itemClicked(Movie movie){
+    public void onDataLoaded() {
+        movieMainFragment.scrollToPosition();
+    }
+
+    @Override
+    public void itemClicked(Movie movie, int position){
         if(!twoPane) {
             Intent movieDetailIntent = new Intent(this, MovieDetailActivity.class);
             movieDetailIntent.putExtra(getString(R.string.movie_extra), movie);
             startActivity(movieDetailIntent);
+
         }else{
 
-
+            movieMainFragment.savePosition(position, movie.getId());
             MovieDetailFragment movieDetailFragment = new MovieDetailFragment();
             movieDetailFragment.setTwoPane(twoPane);
             Bundle args = new Bundle();
@@ -103,4 +113,6 @@ public class MovieMainActivity extends AppCompatActivity implements MovieMainFra
         }
 
     }
+
+
 }

@@ -21,11 +21,11 @@ import example.com.popularmovies.PopularMoviesHelper;
 public class FetchMovieReviewsTask extends AsyncTask<String,Void,ArrayList<Review>> {
 
     Context context;
-    ReviewsRecAdapter movieRecAdapter;
+    ReviewsRecAdapter movieRevRecAdapter;
 
     public FetchMovieReviewsTask(Context context, ReviewsRecAdapter movieRecAdapter){
         this.context = context;
-        this.movieRecAdapter = movieRecAdapter;
+        this.movieRevRecAdapter = movieRecAdapter;
 
     }
     private final String LOG_TAG = this.getClass().getSimpleName();
@@ -70,10 +70,10 @@ public class FetchMovieReviewsTask extends AsyncTask<String,Void,ArrayList<Revie
 
     @Override
     protected void onPostExecute(ArrayList<Review> reviews) {
-        if(reviews == null || reviews.size() == 0){
+        if(reviews == null){
             return;
         }
 
-        this.movieRecAdapter.updateData(reviews);
+        this.movieRevRecAdapter.updateData(reviews);
     }
     }

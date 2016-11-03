@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
@@ -20,10 +21,12 @@ public class ReviewsRecAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     ArrayList<Review> reviews;
     Context context;
+    TextView errorTextView;
 
-    public ReviewsRecAdapter(Context context, ArrayList<Review> reviews){
+    public ReviewsRecAdapter(Context context, ArrayList<Review> reviews, TextView errorTextView){
         this.context = context;
         this.reviews = reviews;
+        this.errorTextView = errorTextView;
     }
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -33,10 +36,9 @@ public class ReviewsRecAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     public void updateData(ArrayList<Review> newReviews){
-        if(newReviews == null || newReviews.size() == 0){
+        if(newReviews == null){
             return;
         }
-
         reviews.clear();
         reviews.addAll(newReviews);
         notifyDataSetChanged();
@@ -45,8 +47,7 @@ public class ReviewsRecAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
         DetailReview detailReview = (DetailReview)holder;
-
-        detailReview.getReviewLabelTextview().setVisibility(View.GONE);
+        errorTextView.setVisibility(View.GONE);
         detailReview.getUserProfile().setBackgroundResource(R.drawable.ic_userprofiledefault);
         detailReview.getUsernameTextview().setText(reviews.get(position).getUsername());
         detailReview.getReviewTextview().setText(reviews.get(position).getReview());

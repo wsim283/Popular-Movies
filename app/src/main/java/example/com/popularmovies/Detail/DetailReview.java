@@ -13,23 +13,19 @@ import example.com.popularmovies.R;
 
 public class DetailReview extends RecyclerView.ViewHolder{
 
-    TextView reviewTextview, reviewLabelTextview, usernameTextview;
+    TextView reviewTextview,usernameTextview;
     ImageView userProfile;
 
     public DetailReview(View parent){
         super(parent);
 
         reviewTextview = (TextView)parent.findViewById(R.id.review_textview);
-        reviewLabelTextview = (TextView)parent.findViewById(R.id.no_reviews_label);
         usernameTextview = (TextView)parent.findViewById(R.id.user_name);
         userProfile = (ImageView)parent.findViewById(R.id.default_user_profile);
     }
 
     public TextView getReviewTextview(){
         return reviewTextview;
-    }
-    public TextView getReviewLabelTextview(){
-        return reviewLabelTextview;
     }
 
     public TextView getUsernameTextview() {

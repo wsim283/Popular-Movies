@@ -3,6 +3,9 @@ package example.com.popularmovies.Main;
 import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import org.json.JSONException;
@@ -27,7 +30,10 @@ public class FetchMovieListTask extends AsyncTask<String,Void,ArrayList<Movie>> 
     MovieRecAdapter movieRecAdapter;
     boolean singleMovie;
 
-    public FetchMovieListTask(Context context, MovieRecAdapter movieRecAdapter, boolean singleMovie){
+    public interface DataListener{
+        void onDataLoaded();
+    }
+    public FetchMovieListTask(Context context,  MovieRecAdapter movieRecAdapter, boolean singleMovie){
         this.context = context;
         this.movieRecAdapter = movieRecAdapter;
         this.singleMovie = singleMovie;
@@ -90,8 +96,9 @@ public class FetchMovieListTask extends AsyncTask<String,Void,ArrayList<Movie>> 
         if(movies == null){
             return;
         }
+
+
         movieRecAdapter.updateData(movies);
-
-
+        ((DataListener)context).onDataLoaded();
     }
 }

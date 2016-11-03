@@ -16,7 +16,9 @@ import java.util.ArrayList;
 import example.com.popularmovies.Movie;
 import example.com.popularmovies.R;
 
-
+/**
+ *fragment of the first Tab that contains info such as ratings, release date, synopsis and trailers
+ */
 public class MovieInfoFragment extends Fragment {
 
     Movie clickedMovie;

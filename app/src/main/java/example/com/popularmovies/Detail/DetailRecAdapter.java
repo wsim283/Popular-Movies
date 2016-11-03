@@ -24,6 +24,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import example.com.popularmovies.Main.MovieMainActivity;
 import example.com.popularmovies.Movie;
 import example.com.popularmovies.PopularMoviesHelper;
 import example.com.popularmovies.R;
@@ -139,6 +140,10 @@ public class DetailRecAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                             if(sortByPath.equals(context.getString(R.string.favourites))){
                                 isFavourite = true;
                             }
+                            //Now easiest way to check whether we are in twoPane
+                            //in this adapter is to check whether the context passed in is MovieMainActivity
+                            //or MovieDetailActivity. If the latter than we are not in twopane
+                            if(context.getClass().getSimpleName().equals(MovieMainActivity.class.getSimpleName()))
                             ((MovieInfoFragment.FavouriteChangeListener)context).favouritesUnMarkClicked(isFavourite, clickedMovie.getId());
 
                         }else{

@@ -11,17 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import org.json.JSONException;
-
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 import example.com.popularmovies.Movie;
 import example.com.popularmovies.Orientation;
-import example.com.popularmovies.PopularMoviesHelper;
 import example.com.popularmovies.R;
 
 
@@ -47,7 +43,7 @@ public class MovieMainFragment extends Fragment implements Orientation {
     }
 
     public void setTwoPane(boolean twoPane) {
-        movieRecAdapter.setFirstMovieClicked(twoPane);
+        movieRecAdapter.setTwoPane(twoPane);
     }
 
     @Override

@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import example.com.popularmovies.R;
 
-/**
+/**View holder for several views for year, date synopsis and rating
  * Created by WSIM on 5/10/2016.
  */
 

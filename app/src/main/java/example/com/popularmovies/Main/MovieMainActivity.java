@@ -95,7 +95,10 @@ public class MovieMainActivity extends AppCompatActivity implements MovieMainFra
 
         }else{
 
+
+            if(position != -1)
             movieMainFragment.savePosition(position, movie.getId());
+
             MovieDetailFragment movieDetailFragment = new MovieDetailFragment();
             movieDetailFragment.setTwoPane(twoPane);
             Bundle args = new Bundle();
@@ -108,7 +111,6 @@ public class MovieMainActivity extends AppCompatActivity implements MovieMainFra
     @Override
     public void favouritesUnMarkClicked(boolean isFavourite, String movieId) {
         if(twoPane && isFavourite){
-            Log.v(LOG_TAG, "favouriteUnMarkClicked");
             movieMainFragment.updateMovieListOffline(movieId);
         }
 

@@ -8,7 +8,9 @@ import android.widget.TextView;
 import example.com.popularmovies.Movie;
 import example.com.popularmovies.R;
 
-
+/**
+ * Only gets used in phone devices
+ */
 public class MovieDetailActivity extends AppCompatActivity {
     private final String LOG_TAG = this.getClass().getSimpleName();
 
@@ -19,6 +21,9 @@ public class MovieDetailActivity extends AppCompatActivity {
 
         if(savedInstanceState == null){
 
+            /**
+             * get the toolbar ready with the title of the movie
+             */
             MovieDetailFragment movieDetailFragment = new MovieDetailFragment();
             Bundle args = new Bundle();
             Movie selectedMovie =  getIntent().getParcelableExtra(getString(R.string.movie_extra));

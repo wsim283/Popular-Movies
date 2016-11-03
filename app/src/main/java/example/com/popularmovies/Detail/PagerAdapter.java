@@ -21,32 +21,27 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     Fragment pageSecondFrag = null;
     Movie selectedMovie;
     Context context;
-    boolean hasReview;
 
     public PagerAdapter(FragmentManager fm, int numTabs, Movie selectedMovie, Context context){
         super(fm);
         this.context = context;
         this.numTabs = numTabs;
         this.selectedMovie = selectedMovie;
-        hasReview = true;
     }
 
-public void setHasReview(boolean hasReview){
-    if(this.hasReview != hasReview){
-        this.hasReview = hasReview;
-        notifyDataSetChanged();
-    }
-}
 
     @Override
     public Fragment getItem(int position) {
 
         switch (position){
-
+            //pretty straight forward approach here,
+            // if there selectedMovie is null that means
+            //the user is currently in favourites list with no movies.
+            //in this case we will show an error fragment instead
             case 1 :
                 if(pageSecondFrag == null){
                     Bundle args = new Bundle();
-                    if(selectedMovie != null & hasReview) {
+                    if(selectedMovie != null) {
                         pageSecondFrag = new ReviewFragment();
                         pageSecondFrag.onAttach(context);
                         args.putParcelable(context.getString(R.string.movie_extra),

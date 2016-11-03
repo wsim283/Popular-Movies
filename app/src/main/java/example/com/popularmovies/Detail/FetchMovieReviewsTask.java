@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 import example.com.popularmovies.PopularMoviesHelper;
 
-/**
+/** AsyncTask to help fetch reviews for a specific movie
  * Created by WSIM on 31/10/2016.
  */
 

@@ -19,7 +19,12 @@ import example.com.popularmovies.Orientation;
 import example.com.popularmovies.PopularMoviesHelper;
 import example.com.popularmovies.R;
 
-
+/**
+ * My approach is to have detailFragment as a fragment with 2 tabs, movie info and movie reviews.
+ * Why I picked this approach is because I realise that movie reviews can be very long
+ * and this can be messy if put together with the movie information.
+ *
+ */
 public class MovieDetailFragment extends Fragment implements Orientation {
 
     private  final String LOG_TAG = this.getClass().getSimpleName();
@@ -43,6 +48,7 @@ public class MovieDetailFragment extends Fragment implements Orientation {
 
 
         Movie selectedMovie = null;
+        //sets up the title first as this is shown by default 
         if(getArguments() != null && getArguments().getParcelable(getString(R.string.movie_extra))!=null) {
             selectedMovie = getArguments().getParcelable(getString(R.string.movie_extra));
             if(twoPane){
@@ -53,6 +59,7 @@ public class MovieDetailFragment extends Fragment implements Orientation {
         }
 
 
+        //sets up the tabs with the pagers
         TabLayout detailsTab = PopularMoviesHelper.setLayoutTab(rootView, R.id.tab_layout);
         final ViewPager viewPager = (ViewPager) rootView.findViewById(R.id.pager);
         pagerAdapter = new PagerAdapter(getActivity().getSupportFragmentManager(), detailsTab.getTabCount(), selectedMovie, getContext());

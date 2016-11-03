@@ -59,16 +59,19 @@ public class MovieRecAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         for(int ix = 0; ix < movieList.size(); ix++){
             if(movieList.get(ix).getId().equals(id)){
                 movieList.remove(ix);
-                if(movieList.size() == 0){
-                    ((MovieMainFragment.MovieMainListener) context).itemClicked(null, -1);
+                if(twoPane) {
+                    if (movieList.size() == 0) {
+                        ((MovieMainFragment.MovieMainListener) context).itemClicked(null, -1);
+                    } else {
+                        ((MovieMainFragment.MovieMainListener) context).itemClicked(movieList.get(0), 0);
+                    }
                 }
-                setFirstMovieClicked(twoPane);
                 notifyDataSetChanged();
                 return;
             }
         }
     }
-    public void setFirstMovieClicked(boolean twoPane){
+    public void setTwoPane(boolean twoPane){
         this.twoPane = twoPane;
 
     }

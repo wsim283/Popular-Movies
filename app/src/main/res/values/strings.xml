@@ -55,4 +55,6 @@
     <string name="error_str_key">error message</string>
     <string name="clicked_position">clicked position</string>
     <string name="clicked_movie_id">clicked movie id</string>
+
+    <string name="transition_poster">poster transition</string>
 </resources>

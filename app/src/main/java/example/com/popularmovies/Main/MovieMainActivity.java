@@ -1,15 +1,18 @@
 package example.com.popularmovies.Main;
 
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import example.com.popularmovies.Detail.MovieDetailActivity;
 import example.com.popularmovies.Detail.MovieDetailFragment;
@@ -87,17 +90,31 @@ public class MovieMainActivity extends AppCompatActivity implements MovieMainFra
     }
 
     @Override
-    public void itemClicked(Movie movie, int position){
+    public void itemClicked(Movie movie, int position, View sharedView){
+        if(position != -1)
+            movieMainFragment.savePosition(position, movie.getId());
         if(!twoPane) {
             Intent movieDetailIntent = new Intent(this, MovieDetailActivity.class);
             movieDetailIntent.putExtra(getString(R.string.movie_extra), movie);
-            startActivity(movieDetailIntent);
+
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && sharedView != null) {
+                Bundle bundle = ActivityOptions
+                        .makeSceneTransitionAnimation(
+                                this,
+                                sharedView,
+                                sharedView.getTransitionName())
+                        .toBundle();
+                Log.v(LOG_TAG, "API 21+ detected, initiating transition: " + sharedView.getTransitionName());
+                startActivity(movieDetailIntent, bundle);
+            }else{
+                startActivity(movieDetailIntent);
+            }
+
 
         }else{
 
 
-            if(position != -1)
-            movieMainFragment.savePosition(position, movie.getId());
+
 
             MovieDetailFragment movieDetailFragment = new MovieDetailFragment();
             movieDetailFragment.setTwoPane(twoPane);

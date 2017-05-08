@@ -52,7 +52,7 @@ public class MovieRecAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void setRestoreItemClicked(int clickedPosition){
         if(twoPane) {
             Log.v(LOG_TAG, "GOT HERE134");
-            ((MovieMainFragment.MovieMainListener) context).itemClicked(movieList.get(clickedPosition), clickedPosition);
+            ((MovieMainFragment.MovieMainListener) context).itemClicked(movieList.get(clickedPosition), clickedPosition, null);
         }
     }
     public void removeMovieData(String id){
@@ -61,9 +61,9 @@ public class MovieRecAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 movieList.remove(ix);
                 if(twoPane) {
                     if (movieList.size() == 0) {
-                        ((MovieMainFragment.MovieMainListener) context).itemClicked(null, -1);
+                        ((MovieMainFragment.MovieMainListener) context).itemClicked(null, -1, null);
                     } else {
-                        ((MovieMainFragment.MovieMainListener) context).itemClicked(movieList.get(0), 0);
+                        ((MovieMainFragment.MovieMainListener) context).itemClicked(movieList.get(0), 0, null);
                     }
                 }
                 notifyDataSetChanged();
@@ -90,7 +90,7 @@ public class MovieRecAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
 
-        Poster poster = (Poster)holder;
+        final Poster poster = (Poster)holder;
         Picasso.with(context).load(movieList.get(position).getImageUrl()).into(poster.getPosterView());
 
 
@@ -98,7 +98,7 @@ public class MovieRecAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         poster.getPosterView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MovieMainFragment.MovieMainListener)context).itemClicked(movieList.get(pos), pos);
+                ((MovieMainFragment.MovieMainListener)context).itemClicked(movieList.get(pos), pos, poster.getPosterView());
             }
         });
 

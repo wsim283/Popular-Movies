@@ -35,7 +35,7 @@ public class MovieMainFragment extends Fragment implements Orientation {
 
 
     public interface MovieMainListener {
-        void itemClicked(Movie movie, int position);
+        void itemClicked(Movie movie, int position, View sharedView);
     }
 
     public MovieMainFragment() {
@@ -49,6 +49,8 @@ public class MovieMainFragment extends Fragment implements Orientation {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
 
     }
 
@@ -79,7 +81,6 @@ public class MovieMainFragment extends Fragment implements Orientation {
                 && savedInstanceState.containsKey(getString(R.string.clicked_movie_id))){
             clickedPosition = savedInstanceState.getInt(getString(R.string.clicked_position));
             movieId = savedInstanceState.getString(getString(R.string.clicked_movie_id));
-
 
         }
 
@@ -121,6 +122,8 @@ public class MovieMainFragment extends Fragment implements Orientation {
             fetchMoviesTask.execute(sortByPath);
         }
 
+        scrollToPosition();
+        Log.v(LOG_TAG, "updateMovieList called");
     }
 
     /**

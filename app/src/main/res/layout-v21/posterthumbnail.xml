@@ -11,6 +11,7 @@
         android:layout_height="@dimen/default_poster_height"
         android:id="@+id/movie_poster_thumbnail"
         android:paddingBottom="@dimen/padding_between_details"
+        android:transitionName="@string/transition_poster"
         />
 
 

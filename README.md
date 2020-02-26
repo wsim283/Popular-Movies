@@ -3,7 +3,7 @@ Popular Movies
 
 Popular Movies is an Android app for the Udacity Nanodegree Project 1 and 2.
 
-###UPDATES:
+### UPDATES:
 01-11-2016 : re-designed detail fragment again to accomodate two-pane layout
 30-10-2016 : overlooked rubrics guideline for favourites, need to save movie IDs instead
 29-10-2016 : re-designed detail fragment to use tabs and pagers to split information as reviews from themoviedb can be very long
